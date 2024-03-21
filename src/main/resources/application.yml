@@ -1,0 +1,12 @@
+server:
+    port: 9000
+logging:
+    level:
+        org.springframework.security: trace
+
+
+oauth2client:
+    oidcClientId: "oidc-client"
+    oidcClientSecret: "{noop}secret"
+    oidcRedirectUri: "http://127.0.0.1:8080/login/oauth2/code/oidc-client"
+    oidcPostLogoutRedirectUri: "http://127.0.0.1:8080/"
