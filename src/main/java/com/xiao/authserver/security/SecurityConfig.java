@@ -46,12 +46,13 @@ import java.util.UUID;
 @EnableWebSecurity
 public class SecurityConfig {
 
-	@Autowired
-	private ClientConfigurations clientConfigurations;
+	private final ClientConfigurations clientConfigurations;
 
-	// refer to Spring Authorization Server ver 1.2.3
+    public SecurityConfig(ClientConfigurations clientConfigurations) {
+        this.clientConfigurations = clientConfigurations;
+    }
 
-	@Bean
+    @Bean
 	@Order(1)
 	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
 			throws Exception {
