@@ -104,6 +104,7 @@ public class SecurityConfig {
 				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+				.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
 				.redirectUri(clientConfigurations.getOidcRedirectUri())
 				.postLogoutRedirectUri(clientConfigurations.getOidcPostLogoutRedirectUri())
 				.scope(OidcScopes.OPENID)
