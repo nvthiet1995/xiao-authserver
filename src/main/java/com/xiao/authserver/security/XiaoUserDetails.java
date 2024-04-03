@@ -12,6 +12,7 @@ public class XiaoUserDetails implements UserDetails {
 
     public XiaoUserDetails(User user) {
         this.user = user;
+        this.user.setPassword("{noop}"+this.user.getPassword());
     }
 
 
