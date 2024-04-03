@@ -6,18 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.Optional;
+import java.util.Collections;
 
 public class XiaoUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.getUserByEmailAddress(email);
-        if(user.isPresent()){
-            return new XiaoUserDetails(user.get());
-        }
-        throw new UsernameNotFoundException("Could not find user with email: "+ email);
+        User user = userRepository.findByEmailAddress(email)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("Could not find user with email: %s", email)));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.EMPTY_LIST);
     }
 }
