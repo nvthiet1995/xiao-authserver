@@ -40,7 +40,12 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
+
+  public SecurityConfig(UserRepository userRepository) {
+      this.userRepository = userRepository;
+  }
+
   @Bean
   @Order(1)
   public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
