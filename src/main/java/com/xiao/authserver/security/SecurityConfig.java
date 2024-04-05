@@ -11,7 +11,6 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
-import com.xiao.authserver.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -20,7 +19,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -40,11 +38,6 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-  private final UserRepository userRepository;
-
-  public SecurityConfig(UserRepository userRepository) {
-      this.userRepository = userRepository;
-  }
 
   @Bean
   @Order(1)
@@ -68,11 +61,6 @@ public class SecurityConfig {
     http.authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
         .formLogin(Customizer.withDefaults());
     return http.build();
-  }
-
-  @Bean
-  public UserDetailsService userDetailsService() {
-    return new XiaoUserDetailsService(userRepository);
   }
 
   @Bean

@@ -5,13 +5,19 @@ import com.xiao.authserver.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
 import java.util.Collections;
 
+@Service
 public class XiaoUserDetailsService implements UserDetailsService {
+
     private final UserRepository userRepository;
-    XiaoUserDetailsService(UserRepository userRepository){
+
+    public XiaoUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     @Override
     public UserDetails loadUserByUsername(String email) {
         User user = userRepository.findByEmailAddress(email)
