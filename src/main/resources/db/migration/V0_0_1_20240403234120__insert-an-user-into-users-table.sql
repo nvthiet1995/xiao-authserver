@@ -6,7 +6,7 @@ INSERT INTO
   )
 VALUES
   (
-    'danh',
-    '$2a$12$xj1L/pFygtuvYNqyIlH7BOlY74QdpRSQ.XM.HmrhAKBAr/GXljBJS',
-    'danh@gmail.com'
+    'system_admin',
+    '$2a$12$fLgqQweQsV7ECFBaRp697ubwJ6W3GWDl/.QKd.0hf2Vyh9MSDLeAa',
+    'admin@gmail.com'
   );
