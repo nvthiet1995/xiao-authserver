@@ -7,7 +7,7 @@ scopes,
 client_settings,
 token_settings)
 VALUES('1d0ae4d0-0ec5-4f64-92aa-db46d718ebae', 'oidc-client', '2024-03-28 15:20:33',
-'{bcrypt}$2a$12$JXWB0VWkJEOIHerKzl279OhFGFaSHkNFjTK9UUhXUfV6FJGFaogL6', NULL,
+'$2a$12$JXWB0VWkJEOIHerKzl279OhFGFaSHkNFjTK9UUhXUfV6FJGFaogL6', NULL,
 'oidc-client', 'client_secret_post,client_secret_basic', 'refresh_token,client_credentials,authorization_code',
 'http://127.0.0.1:8080/login/oauth2/code/oidc-client', 'http://127.0.0.1:8080/',
 'openid,profile',
