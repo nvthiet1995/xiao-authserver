@@ -18,4 +18,14 @@ spring:
         validate-on-migrate: true
         locations: classpath:db/migration
         fail-on-missing-locations: true
+    kafka:
+        bootstrap-servers: "localhost:9092"
 
+info:
+    app:
+        name: "xiao-authserver"
+        description: "AuthServer service in Xiao system"
+        version: "1.0.0"
+
+kafka-topic:
+    user-sync: "env.user-sync"
