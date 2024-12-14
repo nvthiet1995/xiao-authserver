@@ -10,7 +10,6 @@ public class UserSyncDeserializer implements Deserializer<UserSyncDto> {
     @Override
     public UserSyncDto deserialize(String topic, byte[] data) {
         try {
-            objectMapper.findAndRegisterModules();
             return objectMapper.readValue(data, UserSyncDto.class);
         } catch (Exception e) {
             throw new RuntimeException("Error deserializing User object", e);

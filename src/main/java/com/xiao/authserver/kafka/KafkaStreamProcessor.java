@@ -1,6 +1,5 @@
 package com.xiao.authserver.kafka;
 
-import com.xiao.authserver.config.AppConfig;
 import com.xiao.authserver.dto.UserSyncDto;
 import com.xiao.authserver.serdes.UserSyncSerde;
 import com.xiao.authserver.service.UserSyncService;
@@ -14,23 +13,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaStreamProcessor {
 
-  private final AppConfig appConfig;
+    private final KafkaConfigProperties appConfig;
 
-  private final UserSyncService userSyncService;
+    private final UserSyncService userSyncService;
 
-    public KafkaStreamProcessor(AppConfig appConfig, UserSyncService userSyncService) {
-        this.appConfig = appConfig;
+    public KafkaStreamProcessor(KafkaConfigProperties kafkaConfigProperties, UserSyncService userSyncService) {
+        this.appConfig = kafkaConfigProperties;
         this.userSyncService = userSyncService;
     }
-  @Bean
-  public KStream<String, UserSyncDto> kStream(StreamsBuilder streamsBuilder) {
 
-    KStream<String, UserSyncDto> stream =
-        streamsBuilder.stream(
-            appConfig.getUserSyncTopic(), Consumed.with(Serdes.String(), new UserSyncSerde()));
+    @Bean
+    public KStream<String, UserSyncDto> kStream(StreamsBuilder streamsBuilder) {
 
-    stream.peek(userSyncService::processSyncUser);
+        KStream<String, UserSyncDto> stream =
+                streamsBuilder.stream(
+                        appConfig.getUserSyncTopic(), Consumed.with(Serdes.String(), new UserSyncSerde()));
 
-    return stream;
-  }
+        stream.peek(userSyncService::processSyncUser);
+
+        return stream;
+    }
 }
