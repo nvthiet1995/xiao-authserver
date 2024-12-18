@@ -10,7 +10,6 @@ public class UserSyncSerializer implements Serializer<UserSyncDto> {
     @Override
     public byte[] serialize(String topic, UserSyncDto data) {
         try {
-            objectMapper.findAndRegisterModules();
             return objectMapper.writeValueAsBytes(data);
         } catch (Exception e) {
             throw new RuntimeException("Error serializing User object", e);
