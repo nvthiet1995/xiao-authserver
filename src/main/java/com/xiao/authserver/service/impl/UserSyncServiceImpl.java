@@ -46,12 +46,18 @@ public class UserSyncServiceImpl implements UserSyncService {
     }
 
     private void handleUpdateUser(UserSyncDto userSyncDto) {
+        User user = userRepository.findByRefUserId(userSyncDto.getId()).orElseThrow(
+                () -> new RuntimeException("User not found with the refUserId: " + userSyncDto.getId())
+        );
         User updatingUser = userSyncMapper.userSyncDtoToUser(userSyncDto);
-        updatingUser.setId(userSyncDto.getId());
+        updatingUser.setId(user.getId());
         userRepository.save(updatingUser);
     }
 
     private void handleDeleteUser(UserSyncDto userSyncDto) {
-        userRepository.deleteById(userSyncDto.getId());
+        User user = userRepository.findByRefUserId(userSyncDto.getId()).orElseThrow(
+                () -> new RuntimeException("User not found with the refUserId: " + userSyncDto.getId())
+        );
+        userRepository.deleteById(user.getId());
     }
 }
