@@ -2,6 +2,8 @@ package com.xiao.authserver.dto;
 
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class UserSyncDto {
 
@@ -12,4 +14,6 @@ public class UserSyncDto {
     private String password;
 
     private String emailAddress;
+
+    private Set<RoleSyncDto> roles;
 }
