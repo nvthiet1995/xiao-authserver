@@ -50,8 +50,9 @@ public class SecurityConfig {
             (exceptions) ->
                 exceptions.defaultAuthenticationEntryPointFor(
                     new LoginUrlAuthenticationEntryPoint("/login"),
-                    new MediaTypeRequestMatcher(MediaType.TEXT_HTML)))
-        .oauth2ResourceServer((resourceServer) -> resourceServer.jwt(Customizer.withDefaults()));
+                    new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));
+    // jwt
+    http.oauth2ResourceServer((resourceServer) -> resourceServer.jwt(Customizer.withDefaults()));
     return http.build();
   }
 
