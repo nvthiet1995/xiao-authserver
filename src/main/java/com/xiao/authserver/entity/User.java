@@ -3,6 +3,9 @@ package com.xiao.authserver.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -10,8 +13,11 @@ import lombok.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "ref_user_id", nullable = false)
+    private Long refUserId;
 
     @Column(name = "username", nullable = false, length = 100)
     private String username;
@@ -22,4 +28,11 @@ public class User {
     @Column(name = "email_address")
     private String emailAddress;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 }
